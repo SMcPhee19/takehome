@@ -87,5 +87,22 @@ RSpec.describe 'Subscription Request' do
       expect(response).to be_successful
       expect(Subscription.last.status).to eq('cancelled')
     end
+
+    it 'can cancel a subscription - sad path' do
+      user = create(:customer)
+      tea = create(:tea)
+      subscription = create(:subscription, customer_id: user.id, tea_id: tea.id, status: 'cancelled')
+
+      put "/api/v1/subscriptions/#{subscription.id}/cancel"
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+      
+      subscription = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(subscription).to be_a(Hash)
+      expect(subscription).to have_key(:error)
+      expect(subscription[:error]).to be_a(String)
+      expect(subscription[:error]).to eq("Subscription must be active to cancel")
+    end
   end
 end

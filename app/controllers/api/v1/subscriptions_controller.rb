@@ -10,7 +10,12 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   def cancel
     subscription = Subscription.find(params[:subscription_id])
-    subscription.update!(status: 'cancelled')
+    
+    if subscription[:status] == 'active'
+      subscription.update!(status: 'cancelled')
+    else
+      render json: { error: 'Subscription must be active to cancel' }, status: 400
+    end 
   end
 
   private
