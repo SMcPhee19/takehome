@@ -4,7 +4,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     if subscription.save
       render json: SubscriptionSerializer.new(subscription), status: 201
     else
-      render json: { error: user.errors.full_messages.to_sentence }, status: 400
+      render json: { error: subscription.errors.full_messages.to_sentence }, status: 400
     end
   end
 

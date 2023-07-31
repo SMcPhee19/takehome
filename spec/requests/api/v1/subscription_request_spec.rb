@@ -53,7 +53,7 @@ RSpec.describe 'Subscription Request' do
 
       invalid_params = {
         customer_id: user.id,
-        tea_id: nil,
+        tea_id: 123456778905678,
         frequency: 'monthly',
         status: 'active',
         price: '10.00',
@@ -62,14 +62,17 @@ RSpec.describe 'Subscription Request' do
 
       headers = {"CONTENT_TYPE" => "application/json"}
 
-      post '/api/v1/subscriptions', headers: headers, params: JSON.generate(subscription_params)
+      post '/api/v1/subscriptions', headers: headers, params: JSON.generate(invalid_params)
 
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
 
       subscription = JSON.parse(response.body, symbolize_names: true)
 
-      require 'pry'; binding.pry
+      expect(subscription).to be_a(Hash)
+      expect(subscription).to have_key(:error)
+      expect(subscription[:error]).to be_a(String)
+      expect(subscription[:error]).to eq("Tea must exist")
     end
   end
 end
