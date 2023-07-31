@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get '/teas', to: 'teas#index'
       get 'customers', to: 'customers#index'
       post ':subscription', to: 'subscriptions#create'
+      put 'subscriptions/:subscription_id/cancel', to: 'subscriptions#cancel'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

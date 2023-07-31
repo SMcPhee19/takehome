@@ -75,4 +75,17 @@ RSpec.describe 'Subscription Request' do
       expect(subscription[:error]).to eq("Tea must exist")
     end
   end
+
+  describe 'cancel subscription' do
+    it 'can cancel a subscription - happy path' do
+      user = create(:customer)
+      tea = create(:tea)
+      subscription = create(:subscription, customer_id: user.id, tea_id: tea.id)
+
+      put "/api/v1/subscriptions/#{subscription.id}/cancel"
+
+      expect(response).to be_successful
+      expect(Subscription.last.status).to eq('cancelled')
+    end
+  end
 end

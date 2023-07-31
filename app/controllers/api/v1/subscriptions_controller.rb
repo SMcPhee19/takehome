@@ -8,6 +8,11 @@ class Api::V1::SubscriptionsController < ApplicationController
     end
   end
 
+  def cancel
+    subscription = Subscription.find(params[:subscription_id])
+    subscription.update!(status: 'cancelled')
+  end
+
   private
 
   def subscription_params
