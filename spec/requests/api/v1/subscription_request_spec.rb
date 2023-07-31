@@ -105,4 +105,51 @@ RSpec.describe 'Subscription Request' do
       expect(subscription[:error]).to eq("Subscription must be active to cancel")
     end
   end
+
+  describe 'get all subscriptions' do
+    it 'can get all subscriptions' do
+      user = create(:customer)
+      tea1 = create(:tea)
+      tea2 = create(:tea)
+      tea3 = create(:tea)
+      subscription1 = create(:subscription, customer_id: user.id, tea_id: tea1.id)
+      subscription2 = create(:subscription, customer_id: user.id, tea_id: tea2.id)
+      subscription3 = create(:subscription, customer_id: user.id, tea_id: tea3.id, status: 'cancelled')
+
+      get "/api/v1/customers/#{user.id}/subscriptions"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      subscriptions = JSON.parse(response.body, symbolize_names: true)
+
+      expect(subscriptions).to be_a(Hash)
+      expect(subscriptions).to have_key(:data)
+      expect(subscriptions[:data]).to be_an(Array)
+      subscriptions[:data].each do |subscription|
+        expect(subscription).to be_a(Hash)
+        expect(subscription).to have_key(:id)
+        expect(subscription[:id]).to be_a(String)
+        expect(subscription).to have_key(:type)
+        expect(subscription[:type]).to be_a(String)
+        expect(subscription).to have_key(:attributes)
+        expect(subscription[:attributes]).to be_a(Hash)
+        expect(subscription[:attributes]).to have_key(:customer_id)
+        expect(subscription[:attributes][:customer_id]).to be_an(Integer)
+        expect(subscription[:attributes][:customer_id]).to eq(user.id)
+        expect(subscription[:attributes]).to have_key(:tea_id)
+        expect(subscription[:attributes][:tea_id]).to be_an(Integer)
+        expect(subscription[:attributes][:tea_id]).to eq(tea1.id).or eq(tea2.id).or eq(tea3.id)
+        expect(subscription[:attributes]).to have_key(:frequency)
+        expect(subscription[:attributes][:frequency]).to be_a(String)
+        expect(subscription[:attributes]).to have_key(:status)
+        expect(subscription[:attributes][:status]).to be_a(String)
+        expect(subscription[:attributes][:status]).to eq('active').or eq('cancelled')
+        expect(subscription[:attributes]).to have_key(:price)
+        expect(subscription[:attributes][:price]).to be_a(String)
+        expect(subscription[:attributes]).to have_key(:title)
+        expect(subscription[:attributes][:title]).to be_a(String)
+      end
+    end
+  end
 end

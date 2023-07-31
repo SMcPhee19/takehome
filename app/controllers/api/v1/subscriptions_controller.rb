@@ -1,4 +1,9 @@
 class Api::V1::SubscriptionsController < ApplicationController
+  def index
+    customer = Customer.find(params[:customer_id])
+    render json: SubscriptionSerializer.new(customer.subscriptions)
+  end
+  
   def create
     subscription = Subscription.new(subscription_params)
     if subscription.save
@@ -10,7 +15,7 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   def cancel
     subscription = Subscription.find(params[:subscription_id])
-    
+
     if subscription[:status] == 'active'
       subscription.update!(status: 'cancelled')
     else
