@@ -1,4 +1,4 @@
 class Subscription < ApplicationRecord
-  belongs_to :Customer
-  belongs_to :Tea
+  belongs_to :customer
+  belongs_to :tea
 end

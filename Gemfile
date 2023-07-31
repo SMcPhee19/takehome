@@ -59,3 +59,5 @@ end
 
 # Serialzier
 gem 'jsonapi-serializer'
+
+gem 'net-http'
