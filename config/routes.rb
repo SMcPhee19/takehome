@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :subscriptions
-  resources :teas
-  resources :customers
+  namespace :api do
+    namespace :v1 do
+      get '/teas', to: 'teas#index'
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

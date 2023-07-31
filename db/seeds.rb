@@ -9,17 +9,17 @@ Customer.destroy_all
 Tea.destroy_all
 Subscription.destroy_all
 
-User.create!(first_name: 'Greg', last_name: 'Miller', email: 'ceosenior@kindafunny.com', address: '1234 Fake St')
-User.create!(first_name: 'Tim', last_name: 'Gettys', email: 'tim_mf_gettys@kindafunny.com', address: '123 Main Street')
-User.create!(first_name: 'Nick', last_name: 'Scarpino', email: 'producer_slash_seducer@kindafunny.com', address: '123 Maple Street')
-User.create!(first_name: 'Andy', last_name: 'Cortez', email: 'nitro_rifle@kindafunny.com', address: '123 Oak Street')
-User.create!(first_name: 'Kevin', last_name: 'Coello', email: 'bigkevdog@kidnafunny.com', address: '123 Elm Street')
-User.create!(first_name: 'Joey', last_name: 'Noelle', email: 'itschristmaseverymonth@kindafunny.com', address: '123 Spruce Street')
-User.create!(first_name: 'Blessing', last_name: 'Adeoye Jr.', email: 'blesswho@kindafunny.com', address: '123 Pine Street')
-User.create!(first_name: 'Barrett', last_name: 'Courtney', email: 'sadboybarrett@kidnafunny.com', address: '123 Cedar Street')
-User.create!(first_name: 'Mike', last_name: 'Howard', email: 'snowmikebike@kindafunny.com', address: '123 Birch Street')
-User.create!(first_name: 'Roger', last_name: 'Pecoraro', email: 'thelock@kindafunny.com', address: '123 Ash Street')
-User.create!(first_name: 'Greg', last_name: 'Gettys', email: 'coolgreg@kindafunny.com', address: '123 Walnut Street')
+Customer.create!(first_name: 'Greg', last_name: 'Miller', email: 'ceosenior@kindafunny.com', address: '1234 Fake St')
+Customer.create!(first_name: 'Tim', last_name: 'Gettys', email: 'tim_mf_gettys@kindafunny.com', address: '123 Main Street')
+Customer.create!(first_name: 'Nick', last_name: 'Scarpino', email: 'producer_slash_seducer@kindafunny.com', address: '123 Maple Street')
+Customer.create!(first_name: 'Andy', last_name: 'Cortez', email: 'nitro_rifle@kindafunny.com', address: '123 Oak Street')
+Customer.create!(first_name: 'Kevin', last_name: 'Coello', email: 'bigkevdog@kidnafunny.com', address: '123 Elm Street')
+Customer.create!(first_name: 'Joey', last_name: 'Noelle', email: 'itschristmaseverymonth@kindafunny.com', address: '123 Spruce Street')
+Customer.create!(first_name: 'Blessing', last_name: 'Adeoye Jr.', email: 'blesswho@kindafunny.com', address: '123 Pine Street')
+Customer.create!(first_name: 'Barrett', last_name: 'Courtney', email: 'sadboybarrett@kidnafunny.com', address: '123 Cedar Street')
+Customer.create!(first_name: 'Mike', last_name: 'Howard', email: 'snowmikebike@kindafunny.com', address: '123 Birch Street')
+Customer.create!(first_name: 'Roger', last_name: 'Pecoraro', email: 'thelock@kindafunny.com', address: '123 Ash Street')
+Customer.create!(first_name: 'Greg', last_name: 'Gettys', email: 'coolgreg@kindafunny.com', address: '123 Walnut Street')
 
 Tea.create!(title: 'Earl Grey', description: 'A classic black tea with a citrusy twist', brew_temp: '200', brew_time: '3')
 Tea.create!(title: 'English Breakfast', description: 'A classic black tea', brew_temp: '184', brew_time: '5')
