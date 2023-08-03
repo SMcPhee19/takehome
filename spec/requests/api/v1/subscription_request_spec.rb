@@ -80,11 +80,13 @@ RSpec.describe 'Subscription Request' do
     it 'can cancel a subscription - happy path' do
       user = create(:customer)
       tea = create(:tea)
-      subscription = create(:subscription, customer_id: user.id, tea_id: tea.id)
+      subscription = create(:subscription, customer_id: user.id, tea_id: tea.id, status: 'Active')
 
       put "/api/v1/subscriptions/#{subscription.id}/cancel"
+      response = JSON.parse(@response.body, symbolize_names: true)
 
-      expect(response).to be_successful
+      expect(@response).to be_successful
+      expect(@response.status).to eq(200)
       expect(Subscription.last.status).to eq('cancelled')
     end
 
