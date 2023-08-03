@@ -17,7 +17,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     subscription = Subscription.find(params[:subscription_id])
 
     if subscription[:status] == 'Active'
-      subscription.update!(status: 'cancelled')
+      subscription.update!(status: 'canceled')
       render json: SubscriptionSerializer.new(subscription), status: 200
     else
       render json: { error: 'Subscription must be active to cancel' }, status: 400

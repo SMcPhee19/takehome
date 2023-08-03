@@ -87,7 +87,7 @@ RSpec.describe 'Subscription Request' do
 
       expect(@response).to be_successful
       expect(@response.status).to eq(200)
-      expect(Subscription.last.status).to eq('cancelled')
+      expect(Subscription.last.status).to eq('canceled')
     end
 
     it 'can cancel a subscription - sad path' do
